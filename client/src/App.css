@@ -1,0 +1,20 @@
+.notes-container {
+  display: flex;
+}
+
+.navbar {
+  height: 10vh;
+  background-color: red;
+}
+
+.notes-list {
+  width: 20%;
+  height: 90vh;
+  background-color: yellow;
+}
+
+.notes-add-form {
+  width: 80%;
+  height: 90vh;
+  background-color: pink;
+}
