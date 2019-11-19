@@ -1,4 +1,5 @@
 import express from 'express';
+import 'babel-polyfill';
 import Note from '../model/note';
 
 const router = express.Router();
