@@ -10,21 +10,30 @@ import {
   faAngleLeft,
   faSearch,
   faStar,
+  faEllipsisV,
 } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-library.add(faEdit, faTimes, faPlus, faAngleLeft, faSearch, faStar);
+import NotesList from './components/NotesList';
+import AppBar from './components/Appbar';
+import NotesForm from './components/NotesForm';
+
+library.add(
+  faEdit,
+  faTimes,
+  faPlus,
+  faAngleLeft,
+  faSearch,
+  faStar,
+  faEllipsisV,
+);
 
 function App() {
   return (
     <div>
       <NoteContextProvider>
-        <FontAwesomeIcon icon="times" />
-        <FontAwesomeIcon icon="edit" />
-        <FontAwesomeIcon icon="plus" />
-        <FontAwesomeIcon icon="angle-left" />
-        <FontAwesomeIcon icon="search" />
-        <FontAwesomeIcon icon="star" />
+        <AppBar />
+        <NotesForm />
+        <NotesList />
       </NoteContextProvider>
     </div>
   );
