@@ -1,9 +1,17 @@
 import mongoose from 'mongoose';
 
 const noteSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    default: '',
+  },
   note: {
     type: String,
-    required: true,
+    default: '',
+  },
+  date: {
+    type: Date,
+    default: Date.now(),
   },
 });
 

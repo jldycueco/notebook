@@ -1,11 +1,12 @@
 import React, { useContext } from 'react';
 import { NoteContext } from '../context/NoteContext';
 import useForm from '../customhooks/useForm';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const NotesForm = () => {
   const { addNote } = useContext(NoteContext);
 
-  const initialValues = '';
+  const initialValues = { title: '', note: '' };
 
   const { values, handleChange, resetForm } = useForm(initialValues);
 
@@ -18,13 +19,21 @@ const NotesForm = () => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="title"
+          value={values.title}
+          onChange={handleChange}
+        />
         <textarea
           type="text"
           name="note"
-          value={values}
+          value={values.note}
           onChange={handleChange}
         />
-        <input type="submit" value="submit" />
+        <button type="submit">
+          <FontAwesomeIcon icon="plus" />
+        </button>
       </form>
     </div>
   );

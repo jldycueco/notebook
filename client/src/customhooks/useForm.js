@@ -1,10 +1,11 @@
 import { useState } from 'react';
 
 const useForm = (initialValues, callback) => {
-  const [values, setValues] = useState(initialValues || '');
+  const [values, setValues] = useState(initialValues || {});
 
   const handleChange = (event) => {
-    setValues(event.target.value);
+    const { name, value } = event.target;
+    setValues({ ...values, [name]: value });
   };
 
   const resetForm = () => {
