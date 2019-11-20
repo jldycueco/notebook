@@ -1,7 +1,9 @@
 import React, { useContext, useEffect } from 'react';
-import Notes from './Notes/index';
+import Notes from '../Notes/index';
+import { NoteContext } from '../../../context/NoteContext';
 import axios from 'axios';
-import { NoteContext } from '../context/NoteContext';
+
+import styles from './index.module.css';
 
 const NotesList = () => {
   const { notes, setNotes } = useContext(NoteContext);
@@ -21,7 +23,7 @@ const NotesList = () => {
   }, [setNotes]);
 
   return (
-    <div>
+    <div className={styles.notesListContainer}>
       {notes &&
         notes.map((note) => (
           <Notes

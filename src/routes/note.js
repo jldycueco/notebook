@@ -1,5 +1,5 @@
 import express from 'express';
-import 'babel-polyfill';
+// import 'babel-polyfill';
 import Note from '../model/note';
 
 const router = express.Router();
@@ -9,6 +9,18 @@ router.get('/', async (req, res) => {
   try {
     const notes = await Note.find();
     res.json(notes);
+  } catch (err) {
+    res.json(err);
+  }
+});
+
+//Retrieve a single Note
+router.get('/:noteId', async (req, res) => {
+  try {
+    const updateNote = await Note.findById({
+      _id: req.params.noteId,
+    });
+    res.json(updateNote);
   } catch (err) {
     res.json(err);
   }
