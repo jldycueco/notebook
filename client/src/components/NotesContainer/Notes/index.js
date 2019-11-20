@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { NoteContext } from '../../context/NoteContext';
+import { NoteContext } from '../../../context/NoteContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import styles from './index.module.css';

@@ -1,6 +1,7 @@
 import React from 'react';
-import './App.css';
+import styles from './App.module.css';
 import NoteContextProvider from './context/NoteContext';
+import ModalContextProvider from './context/ModalContext';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
@@ -13,9 +14,8 @@ import {
   faEllipsisV,
 } from '@fortawesome/free-solid-svg-icons';
 
-import NotesList from './components/NotesList';
 import AppBar from './components/Appbar';
-import NotesForm from './components/NotesForm';
+import NotesContainer from './components/NotesContainer';
 
 library.add(
   faEdit,
@@ -30,11 +30,16 @@ library.add(
 function App() {
   return (
     <div>
-      <NoteContextProvider>
-        <AppBar />
-        <NotesForm />
-        <NotesList />
-      </NoteContextProvider>
+      <ModalContextProvider>
+        <NoteContextProvider>
+          <div className={styles.AppContainer}>
+            <div className={styles.App}>
+              <AppBar />
+              <NotesContainer />
+            </div>
+          </div>
+        </NoteContextProvider>
+      </ModalContextProvider>
     </div>
   );
 }

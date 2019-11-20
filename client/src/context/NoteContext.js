@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const NoteContext = createContext();
 
-const NoteContextProvider = (props) => {
+const NoteContextProvider = ({ children }) => {
   const [notes, setNotes] = useState([]);
 
   const addNote = (values) => {
@@ -32,7 +32,7 @@ const NoteContextProvider = (props) => {
       <NoteContext.Provider
         value={{ notes, setNotes, addNote, deleteNote, editNote }}
       >
-        {props.children}
+        {children}
       </NoteContext.Provider>
     </div>
   );
