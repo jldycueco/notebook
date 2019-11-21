@@ -5,6 +5,7 @@ export const ModalContext = createContext();
 
 const ModalContextProvider = ({ children }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [modalType, setModalType] = useState('');
 
   const openModal = () => {
     setModalIsOpen(true);
@@ -14,11 +15,22 @@ const ModalContextProvider = ({ children }) => {
     setModalIsOpen(false);
   };
 
-  const backdrop = <Backdrop />;
+  const changeModalType = (value) => {
+    setModalType(value);
+  };
+
+  const backdrop = <Backdrop click={closeModal} />;
 
   return (
     <ModalContext.Provider
-      value={{ modalIsOpen, openModal, closeModal, backdrop }}
+      value={{
+        modalIsOpen,
+        openModal,
+        closeModal,
+        backdrop,
+        modalType,
+        changeModalType,
+      }}
     >
       {children}
     </ModalContext.Provider>

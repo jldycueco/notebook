@@ -18,7 +18,7 @@ const useForm = (initialValues, callback) => {
     resetForm();
   };
 
-  return { values, handleChange, resetForm, handleSubmit };
+  return { values, setValues, handleChange, resetForm, handleSubmit };
 };
 
 export default useForm;
