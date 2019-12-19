@@ -16,6 +16,7 @@ import {
 
 import AppBar from './components/Appbar';
 import NotesContainer from './components/NotesContainer';
+import SearchContextProvider from './context/SearchContext';
 
 library.add(
   faEdit,
@@ -30,16 +31,18 @@ library.add(
 function App() {
   return (
     <div>
-      <ModalContextProvider>
+      <SearchContextProvider>
         <NoteContextProvider>
-          <div className={styles.AppContainer}>
-            <div className={styles.App}>
-              <AppBar />
-              <NotesContainer />
+          <ModalContextProvider>
+            <div className={styles.AppContainer}>
+              <div className={styles.App}>
+                <AppBar />
+                <NotesContainer />
+              </div>
             </div>
-          </div>
+          </ModalContextProvider>
         </NoteContextProvider>
-      </ModalContextProvider>
+      </SearchContextProvider>
     </div>
   );
 }
