@@ -1,9 +1,0 @@
-.appBar {
-  height: 75px;
-  display: flex;
-  flex-direction: row;
-}
-
-.spacer {
-  flex: 1;
-}

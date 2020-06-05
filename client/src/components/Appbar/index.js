@@ -1,9 +1,8 @@
 import React, { useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Navbar, NavbarBrand, Nav } from 'reactstrap';
 
 import { ModalContext } from '../../context/ModalContext';
-import styles from './index.module.css';
-import SearchBar from './SearchBar';
 
 const AppBar = () => {
   const { openModal, changeModalType } = useContext(ModalContext);
@@ -14,16 +13,15 @@ const AppBar = () => {
   };
 
   return (
-    <div className={styles.appBar}>
-      <div>Notes</div>
-      <div className={styles.spacer} />
-      <div>
-        <SearchBar />
-      </div>
-      <div>
-        <FontAwesomeIcon icon="plus" onClick={openModalAddForm} />
-      </div>
-    </div>
+    <>
+      <Navbar color="light" light expand="md">
+        <NavbarBrand href="/">NotebookApp</NavbarBrand>
+        <Nav className="mr-auto" navbar />
+        <NavbarBrand href="#" onClick={openModalAddForm}>
+          Add Notes <FontAwesomeIcon icon="plus" />
+        </NavbarBrand>
+      </Navbar>
+    </>
   );
 };
 

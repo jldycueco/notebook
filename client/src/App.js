@@ -1,8 +1,7 @@
 import React from 'react';
-import styles from './App.module.css';
 import NoteContextProvider from './context/NoteContext';
 import ModalContextProvider from './context/ModalContext';
-
+import { Container, Row, Col } from 'reactstrap';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
   faTimes,
@@ -16,7 +15,6 @@ import {
 
 import AppBar from './components/Appbar';
 import NotesContainer from './components/NotesContainer';
-import SearchContextProvider from './context/SearchContext';
 
 library.add(
   faEdit,
@@ -30,20 +28,20 @@ library.add(
 
 function App() {
   return (
-    <div>
-      <SearchContextProvider>
-        <NoteContextProvider>
-          <ModalContextProvider>
-            <div className={styles.AppContainer}>
-              <div className={styles.App}>
+    <>
+      <NoteContextProvider>
+        <ModalContextProvider>
+          <Container>
+            <Row>
+              <Col sm="12" md={{ size: 6, offset: 3 }}>
                 <AppBar />
                 <NotesContainer />
-              </div>
-            </div>
-          </ModalContextProvider>
-        </NoteContextProvider>
-      </SearchContextProvider>
-    </div>
+              </Col>
+            </Row>
+          </Container>
+        </ModalContextProvider>
+      </NoteContextProvider>
+    </>
   );
 }
 

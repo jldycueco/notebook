@@ -1,21 +1,27 @@
 import React, { useContext, useEffect } from 'react';
 import Notes from '../Notes/index';
 import { NoteContext } from '../../../context/NoteContext';
+import { ListGroup } from 'reactstrap';
 
-import styles from './index.module.css';
+import { getAllNotes } from '../../../action/noteAction';
 
 const NotesList = () => {
-  const { notes, getAllNotes } = useContext(NoteContext);
+  const { notes, dispatch } = useContext(NoteContext);
 
   useEffect(() => {
-    getAllNotes();
-  }, [getAllNotes]);
+    getAllNotes(dispatch);
+  }, [dispatch]);
 
   return (
-    <div className={styles.notesListContainer}>
-      {notes &&
-        notes.map((note) => <Notes key={note._id} note={note} />)}
-    </div>
+    <>
+      {notes && (
+        <ListGroup>
+          {notes.map((note) => (
+            <Notes key={note._id} note={note} />
+          ))}
+        </ListGroup>
+      )}
+    </>
   );
 };
 
