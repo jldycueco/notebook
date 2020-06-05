@@ -1,11 +1,13 @@
-import express from 'express';
+import { Router } from 'express';
 import Note from '../model/note';
 
-const router = express.Router();
+const router = Router();
 
 router.get('/', async (req, res) => {
   try {
-    const notes = await Note.find().select('-__v');
+    const notes = await Note.find()
+      .sort({ date: 'descending' })
+      .exec();
     res.json(notes);
   } catch (err) {
     res.json(err);

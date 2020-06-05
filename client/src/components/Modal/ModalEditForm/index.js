@@ -3,16 +3,17 @@ import { NoteContext } from '../../../context/NoteContext';
 import { ModalContext } from '../../../context/ModalContext';
 import useForm from '../../../customhooks/useForm';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { editNote } from '../../../action/noteAction';
 
 export default function ModalEditForm() {
-  const { editNote, noteId, currentNote } = useContext(NoteContext);
+  const { noteId, currentNote, dispatch } = useContext(NoteContext);
   const { closeModal } = useContext(ModalContext);
 
   const { values, handleChange, resetForm } = useForm(currentNote);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    editNote(noteId, values);
+    editNote(noteId, values, dispatch);
     resetForm();
     closeModal();
   };

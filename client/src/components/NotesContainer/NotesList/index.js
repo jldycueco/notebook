@@ -3,12 +3,14 @@ import Notes from '../Notes/index';
 import { NoteContext } from '../../../context/NoteContext';
 import { ListGroup } from 'reactstrap';
 
+import { getAllNotes } from '../../../action/noteAction';
+
 const NotesList = () => {
-  const { notes, getAllNotes } = useContext(NoteContext);
+  const { notes, dispatch } = useContext(NoteContext);
 
   useEffect(() => {
-    getAllNotes();
-  }, [getAllNotes]);
+    getAllNotes(dispatch);
+  }, [dispatch]);
 
   return (
     <>

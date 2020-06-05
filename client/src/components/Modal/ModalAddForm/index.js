@@ -3,9 +3,10 @@ import { NoteContext } from '../../../context/NoteContext';
 import { ModalContext } from '../../../context/ModalContext';
 import useForm from '../../../customhooks/useForm';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { addNote } from '../../../action/noteAction';
 
 export default function ModalAddForm() {
-  const { addNote } = useContext(NoteContext);
+  const { dispatch } = useContext(NoteContext);
   const { closeModal } = useContext(ModalContext);
 
   const initialValues = { title: '', content: '' };
@@ -14,7 +15,7 @@ export default function ModalAddForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    addNote(values);
+    addNote(values, dispatch);
     resetForm();
     closeModal();
   };

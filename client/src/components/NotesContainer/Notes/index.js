@@ -9,8 +9,10 @@ import {
   ListGroupItemText,
 } from 'reactstrap';
 
+import { deleteNote } from '../../../action/noteAction';
+
 const Notes = ({ note }) => {
-  const { deleteNote, updateCurrentNote } = useContext(NoteContext);
+  const { dispatch, updateCurrentNote } = useContext(NoteContext);
   const { openModal, changeModalType } = useContext(ModalContext);
 
   const openModalEditForm = (note) => {
@@ -22,23 +24,26 @@ const Notes = ({ note }) => {
   return (
     <>
       <ListGroupItem>
-        <ListGroupItemHeading>
+        <ListGroupItemHeading
+          style={{ display: 'flex', justifyContent: 'space-between' }}
+        >
           {note.title}
-
-          <Button
-            onClick={() => openModalEditForm(note)}
-            color="dark"
-            size="xs"
-          >
-            <FontAwesomeIcon icon="edit" />
-          </Button>
-          <Button
-            onClick={() => deleteNote(note._id)}
-            color="danger"
-            size="xs"
-          >
-            <FontAwesomeIcon icon="times" />
-          </Button>
+          <div>
+            <Button
+              onClick={() => openModalEditForm(note)}
+              color="dark"
+              size="xs"
+            >
+              <FontAwesomeIcon icon="edit" size="xs" />
+            </Button>
+            <Button
+              onClick={() => deleteNote(note._id, dispatch)}
+              color="danger"
+              size="xs"
+            >
+              <FontAwesomeIcon icon="times" size="xs" />
+            </Button>
+          </div>
         </ListGroupItemHeading>
 
         <ListGroupItemText>{note.content}</ListGroupItemText>
