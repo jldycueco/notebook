@@ -7,13 +7,13 @@ const NoteContextProvider = ({ children }) => {
   const [notes, setNotes] = useState([]);
   const [currentNote, setCurrentNote] = useState({
     title: '',
-    note: '',
+    content: '',
   });
   const [noteId, setNoteId] = useState('');
 
   const getAllNotes = () => {
     axios
-      .get('/note')
+      .get('/api/note')
       .then((res) => {
         setNotes(res.data);
       })
@@ -21,72 +21,77 @@ const NoteContextProvider = ({ children }) => {
   };
 
   const addNote = (addedNote) => {
-    const postData = { title: addedNote.title, note: addedNote.note };
+    const { title, content } = addedNote;
+
+    const postData = { title, content };
     axios
-      .post('/note', postData)
+      .post('/api/note', postData)
       .then((res) => {
         setNotes([...notes, res.data]);
       })
       .catch((err) => console.log(err));
   };
 
-  const deleteNote = (_id) => {
+  const deleteNote = (id) => {
     axios
-      .delete(`/note/${_id}`)
+      .delete(`/api/note/${id}`)
       .then((res) =>
-        setNotes(notes.filter((note) => note._id !== _id)),
+        setNotes(notes.filter((note) => note._id !== id)),
       )
       .catch((err) => console.log(err));
   };
 
-  const getNote = (_id) => {
+  const getNote = (id) => {
     axios
-      .get(`/note/${_id}`)
+      .get(`/api/note/${id}`)
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
 
-  const editNote = (_id, updatedNotes) => {
+  const editNote = (id, updatedNotes) => {
+    const { title, content } = updatedNotes;
+
     const postData = {
-      title: updatedNotes.title,
-      note: updatedNotes.note,
-      _id: _id,
+      title,
+      content,
+      id,
     };
-    axios
-      .put(`/note/${_id}`, postData)
-      .then((res) =>
-        setNotes(
-          notes.map((note) =>
-            note._id === _id ? updatedNotes : note,
-          ),
-        ),
-      )
-      .catch((err) => console.log(err));
+    axios.put(`/api/note/${id}`, postData).then(
+      axios
+        .get('/api/note')
+        .then((res) => {
+          setNotes(res.data);
+        })
+        .catch((err) => console.log(err)),
+    );
   };
 
   const updateCurrentNote = (note) => {
-    setNoteId(note._id);
+    const { _id, title, content } = note;
+
+    setNoteId(_id);
     setCurrentNote({
-      title: note.title,
-      note: note.note,
+      title,
+      content,
     });
+  };
+
+  const value = {
+    notes,
+    setNotes,
+    getAllNotes,
+    addNote,
+    deleteNote,
+    getNote,
+    editNote,
+    noteId,
+    currentNote,
+    updateCurrentNote,
   };
 
   return (
     <div>
-      <NoteContext.Provider
-        value={{
-          notes,
-          getAllNotes,
-          addNote,
-          deleteNote,
-          getNote,
-          editNote,
-          noteId,
-          currentNote,
-          updateCurrentNote,
-        }}
-      >
+      <NoteContext.Provider value={value}>
         {children}
       </NoteContext.Provider>
     </div>

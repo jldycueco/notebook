@@ -5,7 +5,7 @@ const noteSchema = new mongoose.Schema({
     type: String,
     default: '',
   },
-  note: {
+  content: {
     type: String,
     default: '',
   },

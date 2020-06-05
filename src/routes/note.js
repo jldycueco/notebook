@@ -1,20 +1,17 @@
 import express from 'express';
-// import 'babel-polyfill';
 import Note from '../model/note';
 
 const router = express.Router();
 
-//Retrieve all Notes
 router.get('/', async (req, res) => {
   try {
-    const notes = await Note.find();
+    const notes = await Note.find().select('-__v');
     res.json(notes);
   } catch (err) {
     res.json(err);
   }
 });
 
-//Retrieve a single Note
 router.get('/:noteId', async (req, res) => {
   try {
     const updateNote = await Note.findById({
@@ -26,12 +23,11 @@ router.get('/:noteId', async (req, res) => {
   }
 });
 
-//Add a specific Note
 router.post('/', async (req, res) => {
   try {
     const newNote = new Note({
       title: req.body.title,
-      note: req.body.note,
+      content: req.body.content,
     });
 
     const addNote = await newNote.save();
@@ -41,7 +37,6 @@ router.post('/', async (req, res) => {
   }
 });
 
-//Edit a specific Note
 router.put('/:noteId', async (req, res) => {
   try {
     const updateNote = await Note.findByIdAndUpdate(
@@ -55,7 +50,6 @@ router.put('/:noteId', async (req, res) => {
   }
 });
 
-//Delete a specific Note
 router.delete('/:noteId', async (req, res) => {
   try {
     const deleteNote = await Note.deleteOne({

@@ -1,5 +1,4 @@
 import React, { useState, createContext } from 'react';
-import Backdrop from '../components/Backdrop';
 
 export const ModalContext = createContext();
 
@@ -19,19 +18,16 @@ const ModalContextProvider = ({ children }) => {
     setModalType(value);
   };
 
-  const backdrop = <Backdrop click={closeModal} />;
+  const value = {
+    modalIsOpen,
+    openModal,
+    closeModal,
+    modalType,
+    changeModalType,
+  };
 
   return (
-    <ModalContext.Provider
-      value={{
-        modalIsOpen,
-        openModal,
-        closeModal,
-        backdrop,
-        modalType,
-        changeModalType,
-      }}
-    >
+    <ModalContext.Provider value={value}>
       {children}
     </ModalContext.Provider>
   );

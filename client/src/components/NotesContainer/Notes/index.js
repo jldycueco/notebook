@@ -2,8 +2,12 @@ import React, { useContext } from 'react';
 import { NoteContext } from '../../../context/NoteContext';
 import { ModalContext } from '../../../context/ModalContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-import styles from './index.module.css';
+import {
+  Button,
+  ListGroupItem,
+  ListGroupItemHeading,
+  ListGroupItemText,
+} from 'reactstrap';
 
 const Notes = ({ note }) => {
   const { deleteNote, updateCurrentNote } = useContext(NoteContext);
@@ -16,19 +20,30 @@ const Notes = ({ note }) => {
   };
 
   return (
-    <div className={styles.noteContainer}>
-      <div className={styles.header}>
-        <h1>{note.title}</h1>
-        <div onClick={() => openModalEditForm(note)}>
-          <FontAwesomeIcon icon="edit" />
-        </div>
-        <div onClick={() => deleteNote(note._id)}>
-          <FontAwesomeIcon icon="times" />
-        </div>
-      </div>
+    <>
+      <ListGroupItem>
+        <ListGroupItemHeading>
+          {note.title}
 
-      <p>{note.note}</p>
-    </div>
+          <Button
+            onClick={() => openModalEditForm(note)}
+            color="dark"
+            size="xs"
+          >
+            <FontAwesomeIcon icon="edit" />
+          </Button>
+          <Button
+            onClick={() => deleteNote(note._id)}
+            color="danger"
+            size="xs"
+          >
+            <FontAwesomeIcon icon="times" />
+          </Button>
+        </ListGroupItemHeading>
+
+        <ListGroupItemText>{note.content}</ListGroupItemText>
+      </ListGroupItem>
+    </>
   );
 };
 

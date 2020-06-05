@@ -1,8 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import Notes from '../Notes/index';
 import { NoteContext } from '../../../context/NoteContext';
-
-import styles from './index.module.css';
+import { ListGroup } from 'reactstrap';
 
 const NotesList = () => {
   const { notes, getAllNotes } = useContext(NoteContext);
@@ -12,10 +11,15 @@ const NotesList = () => {
   }, [getAllNotes]);
 
   return (
-    <div className={styles.notesListContainer}>
-      {notes &&
-        notes.map((note) => <Notes key={note._id} note={note} />)}
-    </div>
+    <>
+      {notes && (
+        <ListGroup>
+          {notes.map((note) => (
+            <Notes key={note._id} note={note} />
+          ))}
+        </ListGroup>
+      )}
+    </>
   );
 };
 
